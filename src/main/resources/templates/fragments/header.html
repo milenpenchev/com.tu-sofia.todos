@@ -1,0 +1,14 @@
+<div th:fragment="header">
+	<table>
+		<tr>
+			<td>
+			    <a th:href="@{/auth/login}" th:if="${!loggedIn}" class="btn-as-link">Login</a>
+			</td>
+			<td>
+				<form th:action="@{/auth/logout}" method="post" th:if="${loggedIn}">
+				    <button type="submit" class="btn-as-link">Logout</button>
+				</form>
+			</td>
+		</tr>
+	</table>
+</div>

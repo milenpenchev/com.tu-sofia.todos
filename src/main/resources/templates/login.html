@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+	
+	<link rel="stylesheet" href="/styles/styles.css">
+</head>
+<body>
+	<div th:insert="~{fragments/header :: header}"></div>
+	
+	<h1>Login</h1>
+
+    <!-- Error message -->
+    <div th:if="${param.error}" style="color: red;">
+        Invalid username or password. Please try again.
+    </div>
+
+    <form th:action="@{/auth/login}" method="post">
+        <label>Username:</label>
+        <input type="text" name="username" required>
+        <br>
+        <label>Password:</label>
+        <input type="password" name="password" required>
+        <br>
+        <button type="submit">Login</button>
+    </form>
+</body>
+</html>

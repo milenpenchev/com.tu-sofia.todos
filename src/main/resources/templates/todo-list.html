@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My TODOs</title>
+	
+	<link rel="stylesheet" href="/styles/styles.css">
+</head>
+<body>
+	<div th:insert="~{fragments/header :: header}"></div>
+	
+    <h1>My TODOs</h1>
+    <a href="/todos/new">New TODO</a>
+    <table>
+	    <thead>
+	        <tr>
+	            <th>Task</th>
+	            <th>Due Date</th>
+	            <th>Priority</th>
+	            <th>Actions</th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	        <tr th:each="todo : ${todos}">
+	            <td th:text="${todo.text}"></td>
+	            <td th:text="${todo.dueDate}"></td>
+	            <td th:text="${todo.priority}"></td>
+	            <td>
+	                <!-- Edit Button -->
+	                <a th:href="@{/todos/edit/{id}(id=${todo.id})}">Edit</a>
+	                <!-- Delete Button -->
+	                <form th:action="@{/todos/delete/{id}(id=${todo.id})}" method="post" style="display:inline;">
+	                    <button type="submit">Delete</button>
+	                </form>
+	            </td>
+	        </tr>
+	    </tbody>
+	</table>
+
+</body>
+</html>

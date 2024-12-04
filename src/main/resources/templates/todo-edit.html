@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Edit TODO</title>
+	
+	<link rel="stylesheet" href="/styles/styles.css">
+</head>
+
+<body>
+	<h1>Edit TODO</h1>
+
+	<!-- Edit TODO Form -->
+	<form th:action="@{/todos/edit}" th:object="${todo}" method="post">
+		<!-- Display validation errors if any -->
+		<div th:if="${#fields.hasErrors()}">
+			<ul>
+				<li th:each="error : ${#fields.allErrors()}" th:text="${error}"></li>
+			</ul>
+		</div>
+
+		<input type="hidden" th:field="*{id}" /> <!-- Hidden field for TODO ID -->
+		<div>
+			<label for="text">Task Description:</label>
+			<textarea id="text" th:field="*{text}" placeholder="Enter your task"></textarea>
+		</div>
+		<br>
+		<div>
+			<label for="dueDate">Due Date:</label>
+			<input type="date" id="dueDate" name="dueDate" 
+			       th:value="${#temporals.format(todo.dueDate, 'yyyy-MM-dd')}">
+		</div>
+		<br>
+		<div>
+			<label for="priority">Priority:</label>
+			<select id="priority" th:field="*{priority}">
+				<option value="low">Low</option>
+				<option value="medium">Medium</option>
+				<option value="high">High</option>
+			</select>
+		</div>
+		<br>
+		<button type="submit">Save Changes</button>
+	</form>
+
+	<!-- Back to TODO List -->
+	<a th:href="@{/todos}">Back to TODO List</a>
+</body>
+
+</html>
